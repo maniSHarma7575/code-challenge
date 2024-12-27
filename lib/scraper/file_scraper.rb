@@ -23,5 +23,9 @@ module Scraper
     def output_file_name
       File.basename(@source) + '.output.json'
     end
+
+    def source_type
+      :file
+    end
   end
 end

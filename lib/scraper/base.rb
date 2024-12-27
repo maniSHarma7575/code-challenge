@@ -6,7 +6,9 @@ module Scraper
     def initialize(source)
       @source = source
       @validator = select_validator(source)
-      @validator.valid?
+      unless @validator.valid?
+        raise ArgumentError, "Invalid #{source_type.to_s.capitalize}: #{@source}"
+      end
     end
 
     def scrape
@@ -23,6 +25,10 @@ module Scraper
 
     def output_file_name
       raise NotImplementedError, "Subclasses must implement the output_file_name method"
+    end
+
+    def source_type
+      raise NotImplementedError, "Subclasses must implement the source_type method"
     end
 
     def generate_file(content)
@@ -45,14 +51,8 @@ module Scraper
       "assets/public"
     end
 
-    def determine_source_type(source)
-      return :file if File.file?(source)
-
-      nil
-    end
-
     def select_validator(source)
-      validator_class = SourceValidator::VALIDATORS[determine_source_type(source)]
+      validator_class = SourceValidator::VALIDATORS[source_type]
       raise ArgumentError, "Unsupported source type: #{source}" unless validator_class
 
       validator_class.new(source)
