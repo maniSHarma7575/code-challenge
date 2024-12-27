@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/scraper'
+require_relative '../lib/scraper/file_scraper'
 require 'optparse'
 require 'pathname'
 

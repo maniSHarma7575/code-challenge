@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'source_validator/validators'
 
 module Scraper
@@ -17,11 +18,11 @@ module Scraper
     end
 
     def read_html
-      raise NotImplementedError, "Subclasses must implement the parser method"
+      raise NotImplementedError, "Subclasses must implement the read_html method"
     end
 
     def output_file_name
-      raise NotImplementedError, "Subclasses must implement the parser method"
+      raise NotImplementedError, "Subclasses must implement the output_file_name method"
     end
 
     def generate_file(content)
@@ -30,7 +31,7 @@ module Scraper
     end
 
     def generate_json
-      content = '{}' # Parse the content
+      content = JSON.pretty_generate(scrape)
       generate_file(content)
     end
 

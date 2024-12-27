@@ -9,7 +9,7 @@ module Scraper
     end
 
     def scrape
-      @parser.new(read_html).parse
+      parser.new(read_html).parse
     end
 
     def read_html

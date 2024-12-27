@@ -1,4 +1,6 @@
 require_relative 'base'
+require_relative 'carousel_item_parser'
+require_relative 'carousel_image_parser'
 
 module Parser
   class CarouselParser < Base
@@ -7,7 +9,20 @@ module Parser
     end
 
     def parse
-      { artworks: [] } #Artwork parsed content will come here
+      content = parent_element.map do |element|
+        CarouselItemParser.new(element, carousel_images).parse
+      end
+
+      { artworks: content }
+    end
+
+    def parent_element
+      @document.css('div.iELo6')
+    end
+
+    def carousel_images
+      @images ||= CarouselImageParser.new(@document).parse
     end
   end
 end
+

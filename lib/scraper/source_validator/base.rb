@@ -6,7 +6,7 @@ module Scraper
       end
 
       def valid?
-        raise NotImplementedError, "Subclasses must implement the parser method"
+        raise NotImplementedError, "Subclasses must implement the valid? method"
       end
     end
   end
