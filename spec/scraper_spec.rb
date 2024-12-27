@@ -9,3 +9,4 @@ RSpec.describe Scraper do
     expect(false).to eq(true)
   end
 end
+
