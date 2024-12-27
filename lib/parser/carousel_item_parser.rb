@@ -11,7 +11,7 @@ module Parser
       content = {
         name: name,
         link: link,
-        image: image,
+        image: image
       }
 
       content.merge!(extensions: extensions) unless extensions.empty?
