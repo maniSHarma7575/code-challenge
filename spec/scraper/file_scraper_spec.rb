@@ -29,4 +29,22 @@ RSpec.describe Scraper::FileScraper do
       file_scraper.generate_json
     end
   end
+
+  describe '#read_html' do
+    it 'reads and parses the HTML file using Nokolexbor' do
+      expect(file_scraper.read_html).to be_a(::Nokolexbor::Document)
+    end
+  end
+
+  describe '#parser' do
+    it 'returns an instance of CarouselParser' do
+      expect(file_scraper.parser).to eq(::Parser::CarouselParser)
+    end
+
+    it 'memoizes the parser' do
+      first_call = file_scraper.parser
+      second_call = file_scraper.parser
+      expect(first_call).to equal(second_call)
+    end
+  end
 end

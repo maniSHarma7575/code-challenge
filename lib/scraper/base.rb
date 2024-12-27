@@ -8,6 +8,18 @@ module Scraper
       @validator.valid?
     end
 
+    def scrape
+      raise NotImplementedError, "Subclasses must implement the scrape method"
+    end
+
+    def parser
+      raise NotImplementedError, "Subclasses must implement the parser method"
+    end
+
+    def read_html
+      raise NotImplementedError, "Subclasses must implement the parser method"
+    end
+
     def output_file_name
       raise NotImplementedError, "Subclasses must implement the parser method"
     end
