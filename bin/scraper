@@ -28,5 +28,9 @@ if options[:file]
 
   puts "Scraping file: #{file_path}"
 
-  Scraper::FileScraper.new(file_path).generate_json
+  begin
+    Scraper::FileScraper.new(file_path).generate_json
+  rescue StandardError => e
+    puts "Error during scraping: #{e.message}"
+  end
 end
