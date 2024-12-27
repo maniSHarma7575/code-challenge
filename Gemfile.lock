@@ -12,6 +12,7 @@ GEM
     nokolexbor (0.5.4-arm64-darwin)
     nokolexbor (0.5.4-x86_64-darwin)
     nokolexbor (0.5.4-x86_64-linux)
+    optparse (0.6.0)
     rake (13.2.1)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
@@ -35,6 +36,7 @@ PLATFORMS
 
 DEPENDENCIES
   nokolexbor (~> 0.5.4)
+  optparse (~> 0.6.0)
   rake (~> 13.0)
   rspec (~> 3.0)
   scraper!

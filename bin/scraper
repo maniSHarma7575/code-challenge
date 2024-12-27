@@ -1,1 +1,32 @@
 #!/usr/bin/env ruby
+
+require_relative '../lib/scraper'
+require 'optparse'
+require 'pathname'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: scraper.rb [options]"
+
+  opts.on("-f", "--file FILE", "Path to the file") do |f|
+    options[:file] = f
+  end
+end.parse!
+
+if options[:file].nil?
+  puts "You must provide either a file path or a URI."
+  exit 1
+end
+
+if options[:file]
+  file_path = Pathname.new(options[:file]).expand_path
+
+  if !file_path.absolute?
+    puts "The file path must be absolute. Converting..."
+    file_path = file_path.realpath
+  end
+
+  puts "Scraping file: #{file_path}"
+
+  Scraper::FileScraper.new(file_path).generate_json
+end

@@ -10,3 +10,5 @@ gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"
 
 gem "nokolexbor", "~> 0.5.4"
+
+gem "optparse", "~> 0.6.0"
