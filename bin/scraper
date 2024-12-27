@@ -14,7 +14,7 @@ OptionParser.new do |opts|
 end.parse!
 
 if options[:file].nil?
-  puts "You must provide either a file path or a URI."
+  puts "You must provide either a file path."
   exit 1
 end
 

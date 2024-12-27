@@ -1,7 +1,11 @@
+require_relative 'source_validator/validators'
+
 module Scraper
   class Base
     def initialize(source)
       @source = source
+      @validator = select_validator(source)
+      @validator.valid?
     end
 
     def output_file_name
@@ -26,6 +30,19 @@ module Scraper
 
     def output_directory_path
       "assets/public"
+    end
+
+    def determine_source_type(source)
+      return :file if File.file?(source)
+
+      nil
+    end
+
+    def select_validator(source)
+      validator_class = SourceValidator::VALIDATORS[determine_source_type(source)]
+      raise ArgumentError, "Unsupported source type: #{source}" unless validator_class
+
+      validator_class.new(source)
     end
   end
 end
